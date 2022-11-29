@@ -1,0 +1,74 @@
+.firstItem:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.firstLevel {
+  display: grid;
+  align-items: center;
+
+  color: var(--gray-dark);
+
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25px;
+  grid-template-columns: 24px 1fr;
+  grid-gap: 20px;
+}
+
+.firstLevel:hover {
+  color: var(--primary);
+}
+
+.firstLevelActive {
+  color: var(--primary);
+}
+
+.secondLevel {
+  margin-bottom: 10px;
+
+  cursor: pointer;
+  text-transform: uppercase;
+
+  color: var(--gray-dark);
+
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.secondBlock {
+  margin: 15px 0 0 12px;
+  padding-left: 32px;
+
+  border-left: 2px solid #DFDFDF;
+}
+
+.secondLevelBlock {
+  display: none;
+}
+
+.secondLevelBlock:last-child {
+  margin-bottom: 20px;
+}
+
+.secondLevelBlockOpened {
+  display: block;
+}
+
+.thirdLevel {
+  display: block;
+
+  margin-bottom: 10px;
+
+  cursor: pointer;
+
+  color: var(--gray-dark);
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+.thirdLevel:hover,
+.thirdLevelActive {
+  color: var(--primary);
+}

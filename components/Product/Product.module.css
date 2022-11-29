@@ -1,0 +1,153 @@
+.product {
+  display: grid;
+
+  margin-bottom: 20px;
+
+  padding: 30px;
+  grid-template-columns:
+    [start] 70px [logoend] 30px [titlestart] calc(50% - 100px) [middle] 1fr
+    [pricestart] auto [priceend] 40px [creditstart] auto [creditend] 40px [ratestart] auto [end];
+}
+
+.logo {
+  grid-column: start / logoend;
+  grid-row: 1 / span 2;
+}
+
+.logo img {
+  border-radius: 5px;
+}
+
+.title {
+  align-self: flex-end;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.title,
+.tags {
+  grid-column: titlestart / middle;
+}
+
+.category {
+  margin-top: 5px;
+}
+
+.description {
+  margin-bottom: 15px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.price,
+.priceTitle {
+  grid-column: pricestart / priceend;
+}
+
+.oldPrice {
+  margin-left: 5px;
+}
+
+.credit,
+.creditTitle {
+  grid-column: creditstart / creditend;
+}
+
+.rating,
+.rateTitle {
+  grid-column: ratestart / end;
+}
+
+.line,
+.description,
+.actions {
+  grid-column: start / end;
+}
+
+.feature {
+  grid-column: start / middle;
+}
+
+.advBlock {
+  font-size: 16px;
+  line-height: 22px;
+  grid-column: middle / end;
+}
+
+.price,
+.credit {
+  align-self: flex-end;
+
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.rating {
+  align-self: flex-end;
+}
+
+.priceTitle,
+.creditTitle,
+.rateTitle {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+}
+
+.months {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.reviewButton {
+  margin-left: 20px;
+}
+
+.advTitle {
+  margin-bottom: 5px;
+
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+}
+
+.advantages {
+  padding-left: 15px;
+
+  border-left: 2px solid var(--green);
+}
+
+.disadvantages {
+  margin-top: 20px;
+  padding-left: 15px;
+
+  border-left: 2px solid var(--red);
+}
+
+.characteristics {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding-right: 60px;
+
+  line-height: 32px;
+}
+
+.characteristicsName {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 32px;
+}
+
+.characteristicsDots {
+  flex-grow: 1;
+
+  margin-bottom: 5px;
+
+  border-bottom: 1px dashed var(--gray-light);
+}

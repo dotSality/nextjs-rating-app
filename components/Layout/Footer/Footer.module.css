@@ -1,0 +1,26 @@
+.wrapper {
+  display: grid;
+
+  min-height: 72px;
+  padding: 25px 32px;
+
+  color: var(--white);
+  background-color: var(--primary);
+  grid-template-rows: 1fr;
+  grid-gap: 40px;
+  grid-template-columns: 1fr auto auto;
+}
+
+.wrapper a:hover {
+  color: var(--gray-light);
+}
+
+@media (max-width: 765px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+
+    text-align: center;
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
