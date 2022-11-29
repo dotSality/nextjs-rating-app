@@ -1,1 +1,1 @@
-# Training NextJS project
+# Rating app built with Next.js
