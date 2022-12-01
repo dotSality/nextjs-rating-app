@@ -72,9 +72,9 @@ export const Menu = (): JSX.Element => {
       const toggleCategoryCallback = (): void => openSecondCategory(m._id.secondCategory);
 
       return <div key={m._id.secondCategory}>
-        <div onClick={toggleCategoryCallback} className={s.secondLevel}>
+        <button onClick={toggleCategoryCallback} className={s.secondLevel}>
           {m._id.secondCategory}
-        </div>
+        </button>
         <motion.div
           initial={m.isOpened ? 'visible' : 'hidden'}
           animate={m.isOpened ? 'visible' : 'hidden'}
@@ -82,16 +82,16 @@ export const Menu = (): JSX.Element => {
           layout
           className={s.secondLevelBlock}
         >
-          {buildThirdLevel(m.pages, firstMenu.route)}
+          {buildThirdLevel(m.pages, firstMenu.route, m.isOpened ?? false)}
         </motion.div>
       </div>;
     })}
   </div>;
 
-  const buildThirdLevel = (pages: PageItem[], route: string): JSX.Element[] => pages.map(p =>
+  const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean): JSX.Element[] => pages.map(p =>
     <motion.div variants={variantsChildren} key={p.alias}>
       <Link href={`/${route}/${p.alias}`}>
-        <a className={classNames(s.thirdLevel, {
+        <a tabIndex={isOpened ? 0 : -1} className={classNames(s.thirdLevel, {
           [s.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath,
         })}>
           {p.category}

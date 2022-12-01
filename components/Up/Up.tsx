@@ -10,7 +10,6 @@ export const Up = (): JSX.Element => {
   const posY = useScrollY();
 
   useEffect(() => {
-    console.log(posY, document.body.scrollHeight);
     controls.start({ opacity: posY / document.body.scrollHeight });
   }, [posY, controls]);
 

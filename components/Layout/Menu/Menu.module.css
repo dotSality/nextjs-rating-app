@@ -25,11 +25,14 @@
 
 .secondLevel {
   margin-bottom: 10px;
+  padding: unset;
 
   cursor: pointer;
   text-transform: uppercase;
 
   color: var(--gray-dark);
+  border: none;
+  background: unset;
 
   font-size: 12px;
   line-height: 16px;
@@ -58,6 +61,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
+  outline-offset: -1px;
 }
 
 .thirdLevel:hover,

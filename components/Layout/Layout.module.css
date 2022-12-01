@@ -25,6 +25,24 @@
   grid-area: content;
 }
 
+.skipLink {
+  position: fixed;
+  top: 5px;
+  left: 75px;
+
+  display: block;
+  overflow: hidden;
+
+  height: 0;
+
+  color: var(--white);
+  background: var(--primary);
+}
+
+.displayed {
+  height: auto;
+}
+
 .footer {
   grid-area: footer;
 }

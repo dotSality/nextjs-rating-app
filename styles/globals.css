@@ -22,17 +22,17 @@ a {
 :root {
   --black: #3B434E;
   --white: white;
-  --gray-dark: #787D85;
+  --gray-dark: #505359;
   --gray: #A4A4A4;
   --gray-light: #EBEBEB;
   --body-background: #F5F6F8;
   --rate-grey: #BBB;
   --rate-filled: #FC836D;
-  --primary: #7653FC;
+  --primary: #7351F5;
   --primary-hover: #6344DF;
   --red: #FC836D;
   --red-light: #FEA291;
-  --green: #1DC37E;
+  --green: #067B4A;
   --green-light: #C8F8E4;
   --font-family: "Noto Sans KR", sans-serif;
 }
