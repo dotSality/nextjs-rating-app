@@ -1,7 +1,7 @@
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { ProductModel } from '../../interfaces/product.interface';
 
-export type SortActions = { type: SortEnum.Price } | { type: SortEnum.Rating };
+export type SortActions = { type: SortEnum.Price } | { type: SortEnum.Rating } | { type: 'reset', products: ProductModel[] };
 
 export interface SortReducerState {
   sort: SortEnum;
@@ -9,7 +9,6 @@ export interface SortReducerState {
 }
 
 export const sortReducer = (state: SortReducerState, action: SortActions): SortReducerState => {
-  console.log(action);
   switch (action.type) {
     case SortEnum.Price:
       return {
@@ -20,9 +19,15 @@ export const sortReducer = (state: SortReducerState, action: SortActions): SortR
       return {
         sort: SortEnum.Rating,
         products: state.products
-          .sort((a, b) =>
-            a.initialRating > b.initialRating ? 1 : -1)
+                       .sort((a, b) =>
+                         a.initialRating > b.initialRating ? 1 : -1)
       };
+    case 'reset': {
+      return {
+        sort: SortEnum.Rating,
+        products: action.products
+      };
+    }
     default:
       throw new Error('Wrong sort type');
   }

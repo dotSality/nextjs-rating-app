@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { TopPageComponentProps } from './TopPageComponent.props';
 import { Advantages, HhData, Sort, Tag, TitleComponent } from '../../components';
 import s from './TopPageComponent.module.css';
@@ -6,9 +6,16 @@ import { TopLevelCategory } from '../../interfaces/page.interface';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
 import { Product } from '../../components/Product/Product';
+import { useScrollY } from '../../hooks/useScrollY';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
   const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(sortReducer, { products, sort: SortEnum.Rating });
+
+  const scrollY = useScrollY();
+  console.log(scrollY);
+  useEffect(() => {
+    dispatchSort({ type: 'reset', products });
+  }, [products]);
 
   const setSort = (sort: SortEnum): void => dispatchSort({ type: sort });
 
@@ -20,7 +27,7 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
         <Sort sort={sort} setSort={setSort}/>
       </div>
       <div>
-        {sortedProducts && sortedProducts.map(product => <Product key={product._id} product={product}/>)}
+        {sortedProducts && sortedProducts.map(product => <Product layout key={product._id} product={product}/>)}
       </div>
       <div className={s.hhTitle}>
         <TitleComponent tag="h2">Vacancies - {page.category}</TitleComponent>

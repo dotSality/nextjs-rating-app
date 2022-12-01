@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import s from './Textarea.module.css';
 import { TextareaProps } from './Textarea.props';
 import classNames from 'classnames';
 
-export const Textarea = ({ className, ...props }: TextareaProps): JSX.Element => {
-  const totalClassName = classNames(s.textarea, className);
+export const Textarea = forwardRef(({ className, error, ...props }: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>): JSX.Element => {
+  const wrapperClassName = classNames(s.textareaWrapper, className);
+
+  const totalClassName = classNames(s.textarea, {
+    [s.error]: !!error,
+  });
 
   return (
-    <textarea className={totalClassName} {...props}/>
+    <div className={wrapperClassName}>
+      <textarea className={totalClassName} {...props} ref={ref}/>
+      {error && <span className={s.errorMessage}>{error.message}</span>}
+    </div>
   );
-};
+});

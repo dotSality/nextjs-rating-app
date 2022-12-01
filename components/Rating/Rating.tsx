@@ -1,16 +1,22 @@
-import React, { useState, KeyboardEvent, useEffect } from 'react';
+import React, { useState, KeyboardEvent, useEffect, forwardRef, ForwardedRef } from 'react';
 import { RatingProps } from './Rating.props';
 import RatingStar from './ratingStar.svg';
 import s from './Rating.module.css';
 import classNames from 'classnames';
 
-export const Rating = ({currentRating, onRatingChange, isEditable = false, ...props}: RatingProps): JSX.Element => {
+export const Rating = forwardRef(({
+  error,
+  currentRating,
+  onRatingChange,
+  isEditable = false,
+  ...props
+}: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
   const [rating, setRating] = useState<number>(currentRating);
-  
+
   useEffect(() => {
     setRating(currentRating);
-  },[currentRating]);
-  
+  }, [currentRating]);
+
   const onChange = (rating: number): void => {
     isEditable && onRatingChange?.(rating);
   };
@@ -18,7 +24,7 @@ export const Rating = ({currentRating, onRatingChange, isEditable = false, ...pr
   const onHoverRatingChange = (rating: number): void => {
     isEditable && setRating(rating);
   };
-  
+
   const onKeyRatingChange = (e: KeyboardEvent<SVGElement>, rating: number): void => {
     if (e.key === 'Enter' || e.code === 'Space') {
       onChange(rating);
@@ -26,17 +32,17 @@ export const Rating = ({currentRating, onRatingChange, isEditable = false, ...pr
   };
 
   const setDefaultRating = (): void => setRating(currentRating);
-  
-  const ratingStars = Array.from(Array(5), (_,idx) => {
+
+  const ratingStars = Array.from(Array(5), (_, idx) => {
     const index = idx + 1;
-    
+
     const isFilled = index <= rating;
 
     const starClassName = classNames(s.star, {
       [s.editable]: isEditable,
       [s.filled]: isFilled,
     });
-    
+
     return <span
       onMouseEnter={(): void => onHoverRatingChange(index)}
       key={index}
@@ -50,9 +56,14 @@ export const Rating = ({currentRating, onRatingChange, isEditable = false, ...pr
     </span>;
   });
 
+  const ratingClassName = classNames(s.ratingWrapper, {
+    [s.error]: !!error,
+  });
+
   return (
-    <div onMouseLeave={setDefaultRating} {...props}>
+    <div ref={ref} className={ratingClassName} onMouseLeave={setDefaultRating} {...props}>
       {ratingStars}
+      {error && <span className={s.errorMessage}>{error.message}</span>}
     </div>
   );
-};
+});

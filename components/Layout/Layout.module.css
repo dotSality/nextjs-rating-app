@@ -35,7 +35,7 @@
   }
 
   .header {
-    display: block;
+    display: inherit;
   }
 
   .wrapper {
@@ -44,6 +44,7 @@
       "header"
       "content"
       "footer";
+    gap: 10px;
   }
 
   .content {

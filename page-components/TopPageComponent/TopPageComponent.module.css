@@ -1,9 +1,11 @@
 .title {
   display: grid;
-  grid-template-columns: auto 1fr auto;
 
   align-items: center;
   justify-content: left;
+
+  margin-bottom: 30px;
+  grid-template-columns: auto 1fr auto;
   gap: 20px;
 }
 
@@ -37,4 +39,10 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 27px;
+}
+
+@media (max-width: 640px) {
+  .title {
+    grid-template-columns: auto 1fr;
+  }
 }

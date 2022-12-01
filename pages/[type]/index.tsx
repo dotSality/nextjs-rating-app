@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticPathsContext, GetStaticProps, GetStaticPropsCo
 import { firstLevelMenu } from '../../helpers/helpers';
 import axios from 'axios';
 import { MenuItem } from '../../interfaces/menu.interface';
+import { API } from '../../helpers/api';
 
 const TopPage = (): JSX.Element => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const TopPage = (): JSX.Element => {
 
 export default withLayout(TopPage);
 
-export const getStaticPaths: GetStaticPaths = async ({}: GetStaticPathsContext) => {
+export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = firstLevelMenu.map(item => '/' + item.route);
 
@@ -42,7 +43,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ params }: GetS
       return { notFound: true };
     }
 
-    const url = process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find';
+    const url = API.topPage.find;
 
     const { data: menu } = await axios.post<MenuItem[]>(url, { firstCategory: firstCategoryItem.id });
 

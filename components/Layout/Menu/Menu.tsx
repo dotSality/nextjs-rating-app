@@ -6,18 +6,43 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { firstLevelMenu } from '../../../helpers/helpers';
+import { motion } from 'framer-motion';
 
 export const Menu = (): JSX.Element => {
   const router = useRouter();
 
+  const variants = {
+    visible: {
+      marginBottom: 20,
+      transition: {
+        when: 'beforeChildren',
+        staggerChildren: 0.02,
+      }
+    },
+    hidden: {
+      marginBottom: 0,
+    },
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      height: 'auto',
+    },
+    hidden: {
+      opacity: 0,
+      height: 0,
+    },
+  };
+
   const { menu, setMenu, firstCategory } = useContext(AppContext);
-  
+
   const openSecondCategory = (secondCategory: string): void => {
     setMenu?.(menu.map(m => {
       if (m._id.secondCategory === secondCategory) {
         m.isOpened = !m.isOpened;
       }
-      
+
       return m;
     }));
   };
@@ -43,33 +68,36 @@ export const Menu = (): JSX.Element => {
       if (m.pages.map(p => p.alias).includes(router.asPath.split('/')[2])) {
         m.isOpened = true;
       }
-      
+
       const toggleCategoryCallback = (): void => openSecondCategory(m._id.secondCategory);
-      
-      const className = classNames(s.secondLevelBlock, {
-        [s.secondLevelBlockOpened]: m.isOpened,
-      });
-      
-      
+
       return <div key={m._id.secondCategory}>
         <div onClick={toggleCategoryCallback} className={s.secondLevel}>
           {m._id.secondCategory}
         </div>
-        <div className={className}>
+        <motion.div
+          initial={m.isOpened ? 'visible' : 'hidden'}
+          animate={m.isOpened ? 'visible' : 'hidden'}
+          variants={variants}
+          layout
+          className={s.secondLevelBlock}
+        >
           {buildThirdLevel(m.pages, firstMenu.route)}
-        </div>
+        </motion.div>
       </div>;
     })}
   </div>;
 
   const buildThirdLevel = (pages: PageItem[], route: string): JSX.Element[] => pages.map(p =>
-      <Link key={p.alias} href={`/${route}/${p.alias}`}>
+    <motion.div variants={variantsChildren} key={p.alias}>
+      <Link href={`/${route}/${p.alias}`}>
         <a className={classNames(s.thirdLevel, {
           [s.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath,
         })}>
           {p.category}
         </a>
-      </Link>);
+      </Link>
+    </motion.div>);
 
   return (
     <div className={s.menu}>
